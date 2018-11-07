@@ -59,7 +59,7 @@ function redraw() {
     // Can't be exactly 0, otherwise the image will just be blank.
     context.strokeStyle = "#111";
     context.lineJoin = "round";
-    context.lineWidth = 5;
+    context.lineWidth = 20;
 
     for(var i=0; i < clickX.length; i++) {        
         context.beginPath();
