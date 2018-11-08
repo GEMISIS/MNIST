@@ -31,7 +31,7 @@ model.compile(optimizer='adam',
 # Train the model.
 model.fit(train_images, train_labels, epochs=5)
 
-# Run "tensorflowjs_converter --input_format keras model.h5py site/modal" to convert this to a
+# Run "tensorflowjs_converter --input_format keras model.h5py web/modal" to convert this to a
 # Tensorflow JS comaptible model.
 # Save the model.
 model.save('model.h5py')

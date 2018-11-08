@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MNIST</string>
+    <string name="reset_text">Reset</string>
+</resources>
