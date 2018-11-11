@@ -9,17 +9,46 @@
     <gemisis.mnist.views.EaselView
         android:id="@+id/easel_view"
         android:layout_width="match_parent"
-        android:layout_height="461dp" />
+        android:layout_height="420dp" />
 
-    <Button
-        android:id="@+id/button"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/easel_view"
         android:layout_centerHorizontal="true"
-        android:onClick="reset"
-        android:text="@string/reset_text"
-        tools:layout_editor_absoluteX="147dp"
-        tools:layout_editor_absoluteY="460dp" />
+        android:layout_marginTop="4dp"
+        android:text="@string/prediction_text"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/prediction_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:text="?"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/easel_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="94dp"
+        android:text="@string/confidence_text"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/confidence_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="85dp"
+        android:text="?"
+        android:textSize="30sp" />
 
 </RelativeLayout>

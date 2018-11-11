@@ -4,8 +4,8 @@
     <title>MNIST Demo</title>
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
 </head>
-<body>
-    <div class="container mt-5">
+<body style="min-height: 100%;">
+    <div class="container">
         <div class="row justify-content-center align-items-center">
             <div class="col-6">
                 <!-- Progress bar -->
@@ -13,10 +13,10 @@
             </div>
         </div>
         <div class="row justify-content-center align-items-center">
-            <canvas id="canvas" width="480" height="480" style="border: 1px solid black;"></canvas>
+            <canvas id="canvas" width="480" height="480" style="border: 1px solid black; touch-action: none; width: 480px; height: 480px;"></canvas>
         </div>
         <div class="row justify-content-center align-items-center">
-            <h1 id="textInput"></h1>
+            <h1 id="textInput">Prediction: TBD</h1>
         </div>
     </div>
 

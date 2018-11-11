@@ -16,14 +16,21 @@ class_names = ['0', '1', '2', '3', '4',
 # Pre-process the data.
 train_images = train_images / 255.0
 test_images = test_images / 255.0
+train_images = train_images.reshape(train_images.shape[0], 28, 28, 1)
+test_images = test_images.reshape(test_images.shape[0], 28, 28, 1)
 
 # Create the model.
-model = keras.Sequential([
-    keras.layers.Flatten(input_shape=(28,28,)),
-    keras.layers.Dense(512, activation=tf.nn.relu),
-    keras.layers.Dropout(0.2),
-    keras.layers.Dense(10, activation=tf.nn.softmax)
-])
+model = keras.Sequential()
+model.add(keras.layers.Conv2D(32, kernel_size=(5, 5),
+                 activation='relu',
+                 input_shape=(28, 28, 1)))
+model.add(keras.layers.MaxPooling2D(pool_size=(2, 2)))
+model.add(keras.layers.Conv2D(64, (5, 5), activation='relu'))
+model.add(keras.layers.MaxPooling2D(pool_size=(2, 2)))
+model.add(keras.layers.Flatten())
+model.add(keras.layers.Dense(1024, activation='relu'))
+model.add(keras.layers.Dropout(0.5))
+model.add(keras.layers.Dense(10, activation='softmax'))
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
@@ -31,18 +38,20 @@ model.compile(optimizer='adam',
 # Train the model.
 model.fit(train_images, train_labels, epochs=5)
 
-# Run "tensorflowjs_converter --input_format keras model.h5py web/modal" to convert this to a
+# Run "tensorflowjs_converter --input_format keras model.h5py web/model" to convert this to a
 # Tensorflow JS comaptible model.
 # Save the model.
 model.save('model.h5py')
 
 # Do a quick evaluation
 test_loss, test_acc = model.evaluate(test_images, test_labels)
+print('Test loss:', test_loss)
 print('Test accuracy:', test_acc)
 
 # Now get a prediction.
 predictions = model.predict(test_images)
 
+test_images = test_images.reshape(test_images.shape[0], 28, 28)
 # Finally print out a graph of the first few images.
 plt.figure(figsize=(10,10))
 for i in range(25):
