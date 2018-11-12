@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MNIST</string>
+    <string name="app_name">MNIST Demo</string>
     <string name="reset_text">Reset</string>
     <string name="prediction_text">Prediction</string>
     <string name="confidence_text">Confidence</string>

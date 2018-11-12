@@ -40,6 +40,8 @@ model.fit(train_images, train_labels, epochs=5)
 
 # Run "tensorflowjs_converter --input_format keras model.h5py web/model" to convert this to a
 # Tensorflow JS comaptible model.
+# Run "tflite_convert --keras_model_file=model.h5py --output_file=android/app/src/main/res/raw/model.tflite"
+# to conver this to a TensorFlow Lite compatible model.
 # Save the model.
 model.save('model.h5py')
 

@@ -1,5 +1,5 @@
 let timer;
-let predictionTimer = 250;
+let predictionTimer = 2500;
 let canvas = document.getElementById('canvas');
 context = canvas.getContext("2d");
 

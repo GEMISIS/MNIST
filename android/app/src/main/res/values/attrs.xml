@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="EaselView">
+        <attr name="aspect_ratio" format="enum">
+            <enum name="none" value="0" />
+            <enum name="square" value="1" />
+            <enum name="land" value="2" />
+            <enum name="portrait" value="3" />
+        </attr>
+    </declare-styleable>
+</resources>

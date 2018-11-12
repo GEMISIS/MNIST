@@ -1,16 +1,20 @@
 package gemisis.mnist.views
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.View
+import gemisis.mnist.R
 
 class EaselView : View {
     private val mPaintColor: Int = Color.WHITE
     private val mBrushSize: Float = 50.0f
     private val mDrawPaint: Paint = Paint()
     private val mPath: Path = Path()
+    private var mAspectRatio: Int = 0
     var mActionEventListeners: MutableList<ActionEventListener> = ArrayList()
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
@@ -18,6 +22,64 @@ class EaselView : View {
         isFocusableInTouchMode = true
         setBackgroundColor(Color.BLACK)
         setupPaint()
+
+        context.theme.obtainStyledAttributes(attrs, R.styleable.EaselView, 0, 0).apply {
+            try {
+                mAspectRatio = getInt(R.styleable.EaselView_aspect_ratio, 0)
+            } finally {
+                recycle()
+            }
+        }
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        if (mAspectRatio == 0) {
+            return super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        }
+        var originalWidth = MeasureSpec.getSize(widthMeasureSpec)
+        var originalHeight = MeasureSpec.getSize(heightMeasureSpec)
+        var finalWidth = originalWidth
+        var finalHeight = originalHeight
+        var displayMetrics = DisplayMetrics()
+        (context as Activity).windowManager.defaultDisplay.getMetrics(displayMetrics)
+        when (mAspectRatio) {
+            0 -> {
+                // Do nothing by default.
+            }
+            1 -> {
+                // Square aspect ratio.
+                if (originalHeight > displayMetrics.widthPixels) {
+                    finalHeight = finalWidth
+                } else {
+                    finalWidth = finalHeight
+                }
+            }
+            2 -> {
+                // Landscape aspect ratio.
+                var calculatedHeight = originalWidth * 9 / 16
+                if (calculatedHeight > originalHeight) {
+                    finalWidth = originalHeight * 16 / 9
+                    finalHeight = originalHeight
+                } else {
+                    finalWidth = originalWidth
+                    finalHeight = calculatedHeight
+                }
+            }
+            3 -> {
+                // Portrait aspect ratio.
+                var calculatedHeight = originalWidth * 16 / 9
+                if (calculatedHeight > originalHeight) {
+                    finalWidth = originalHeight * 9 / 16
+                    finalHeight = originalHeight
+                } else {
+                    finalWidth = originalWidth
+                    finalHeight = calculatedHeight
+                }
+            }
+        }
+        super.onMeasure(
+                MeasureSpec.makeMeasureSpec(finalWidth, MeasureSpec.EXACTLY),
+                MeasureSpec.makeMeasureSpec(finalHeight, MeasureSpec.EXACTLY))
     }
 
     private fun setupPaint() {
